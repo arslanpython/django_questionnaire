@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question</title>
+</head>
+<body leftmargin="100px">
+    <h4>Questionnaire Title: </h4>
+    <h5 style="color:#0000FF; ">{{ questionnaire_title }}</h5>
+    <h4 style="color:#ffffe;">{{ selected_choice.message }} </h4>
+    <h4 style="color:#008000;">{{ question.question_text }}</h4>
+
+    <form action="" method="get">
+        {% csrf_token %}
+        {% if question.choices %}
+        {% for choice in question.choices %}
+        <input type="radio" name="choice_id" value="{{ choice.id }}">
+        <label>{{ choice.choice_text}}</label><br>
+        {% endfor %}
+        <br><button type="submit" style="font-size:18px; font-style:bold;">Submit</button>
+        {% endif %}
+
+        <input type="hidden" name="count" value="{{ count }}">
+        <input type="hidden" name="question_id" value="{{ question.id }}">
+    </form>
+    <br>
+    <a href="/" style="font-style:bold: font_size:18px;">Go to Home</a>
+</body>
+</html>
